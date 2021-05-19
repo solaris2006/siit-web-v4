@@ -61,10 +61,6 @@ public class OrderProductDao {
 
         jdbcTemplate.update(updateQuery, temp, orderId, productId);
 
-
-
-
-
     }
 
 
@@ -74,5 +70,6 @@ public class OrderProductDao {
            jdbcTemplate.update(sql, orderId, orderProduct.getProduct().getId(), orderProduct.getQuantity());
 
     }
+
 
 }
