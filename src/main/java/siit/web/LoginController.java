@@ -17,8 +17,6 @@ import java.util.List;
 public class LoginController {
     private int value = 0;
 
-    @Autowired
-    UserService userService ;
 
     @RequestMapping(method = RequestMethod.GET)
     protected String displayLoginForm() {
@@ -28,13 +26,8 @@ public class LoginController {
     @RequestMapping(method = RequestMethod.POST)
     protected ModelAndView performLogin(HttpSession session,
                                         @RequestParam String user, @RequestParam String password) {
-
-        List<User> userList = userService.getUserList();
         ModelAndView mav = new ModelAndView();
-
-        for (User userTemp : userList ){
-
-        if (user.equals(userTemp.getName()) && password.equals(userTemp.getPass())) {
+       if ((!user.isEmpty() || !password.isEmpty()) && user.equals(password) ) {
             session.setAttribute("logged_user", user);
             mav.setViewName("redirect:/customers");
         } else {
@@ -43,10 +36,6 @@ public class LoginController {
             mav.setViewName("login");
             mav.addObject("error", error);
         }
-
-        }
-
-
         return mav;
     }
 }
